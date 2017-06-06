@@ -6,7 +6,7 @@ package com.rnergachev.imagegallery.data.model;
  * Created by rnergachev on 06/06/2017.
  */
 
-class FlickrImage {
+public class FlickrImage {
     private String m;
     public String getImageLink() {
         return m;

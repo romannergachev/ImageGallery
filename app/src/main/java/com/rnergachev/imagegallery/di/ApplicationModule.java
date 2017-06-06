@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.rnergachev.imagegallery.R;
-import com.rnergachev.imagegallery.data.network.FlickrDbService;
+import com.rnergachev.imagegallery.data.network.FlickrRetrofitDefinition;
 
 import javax.inject.Singleton;
 
@@ -35,13 +35,13 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public FlickrDbService provideMovieDbService() {
+    public FlickrRetrofitDefinition provideMovieDbService() {
         Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(context.getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        return retrofit.create(FlickrDbService.class);
+        return retrofit.create(FlickrRetrofitDefinition.class);
     }
 }

@@ -100,8 +100,8 @@ public class ImagesOverviewAdapter extends RecyclerView.Adapter<ImagesOverviewAd
 
     @Override
     public void onBindViewHolder(ImagesOverviewAdapterViewHolder holder, int position) {
-        String tvShowUrl = flickrImageDataList.get(position).getMedia().getImageLink();
-        Picasso.with(context).load(context.getString(R.string.image_base_url) + tvShowUrl).into(holder.imageThumbnail);
+        String image = flickrImageDataList.get(position).getMedia().getImageLink();
+        Picasso.with(context).load(image).into(holder.imageThumbnail);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class ImagesOverviewAdapter extends RecyclerView.Adapter<ImagesOverviewAd
      * Fetches new portion of images from flickr
      *
      */
-    public void fetchTVShows() {
+    public void fetchImages() {
         handler.onDismissError();
         handler.onFetchingStarted();
 

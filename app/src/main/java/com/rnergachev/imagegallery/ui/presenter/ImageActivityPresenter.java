@@ -22,16 +22,15 @@ import javax.inject.Singleton;
 public class ImageActivityPresenter {
 
     private int currentPosition;
-    ImageActivityView view;
+    private ImageActivityView view;
     private List<FlickrImageData> flickrImageDataList;
-    FlickrApi flickrApi;
+    private FlickrApi flickrApi;
 
     @Inject
     public ImageActivityPresenter(FlickrApi flickrApi) {
         this.flickrApi = flickrApi;
         flickrImageDataList = new ArrayList<>();
     }
-
 
 
     /**
@@ -43,16 +42,30 @@ public class ImageActivityPresenter {
         Log.d(this.getClass().getName(), exception.getMessage());
     }
 
+    /**
+     * Sets view for the presenter
+     *
+     * @param  view  view
+     */
     public void setView(ImageActivityView view) {
         this.view = view;
     }
 
+    /**
+     * Sets image list received from the overview activity
+     *
+     * @param  flickrImageDataList  list
+     * @param  index                index of the current image
+     */
     public void setImageDetails(ArrayList<FlickrImageData> flickrImageDataList, int index) {
         this.flickrImageDataList.clear();
         this.currentPosition = index;
         this.flickrImageDataList.addAll(flickrImageDataList);
     }
 
+    /**
+     * Fetch images from the flickr
+     */
     public void fetchImages() {
         flickrApi.getPublicPhotos().subscribe(
             response -> {
@@ -63,14 +76,25 @@ public class ImageActivityPresenter {
         );
     }
 
+    /**
+     * Get number of list elements
+     */
     public int getCount() {
         return flickrImageDataList.size();
     }
 
+    /**
+     * Get selected image details
+     *
+     * @param  position  position in the list
+     */
     public FlickrImageData getImage(int position) {
         return flickrImageDataList.get(position);
     }
 
+    /**
+     * Get the current list position
+     */
     public int getCurrentPosition() {
         return currentPosition;
     }

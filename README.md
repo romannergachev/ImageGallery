@@ -8,6 +8,10 @@ Dependancies:
 * RxAndroid
 * Gson
 * Picasso
+* Joda-time
+* Butterknife
+* Dagger2
+* Mockito
 
 
 ### Setup

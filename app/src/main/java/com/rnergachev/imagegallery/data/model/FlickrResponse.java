@@ -11,6 +11,12 @@ import java.util.List;
 public class FlickrResponse {
     private List<FlickrImageData> items;
 
+    public FlickrResponse() {}
+
+    public FlickrResponse(List<FlickrImageData> items) {
+        this.items = items;
+    }
+
     public List<FlickrImageData> getPhotos() {
         return items;
     }

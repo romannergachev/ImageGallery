@@ -15,7 +15,6 @@ import com.rnergachev.imagegallery.data.network.FlickrApi;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -24,7 +23,7 @@ import butterknife.ButterKnife;
 
 /**
  * Adapter class flickr images
- *
+ * <p>
  * Created by roman on 06.06.2017.
  */
 
@@ -35,12 +34,20 @@ public class ImagesOverviewAdapter extends RecyclerView.Adapter<ImagesOverviewAd
     @Inject
     FlickrApi flickrApi;
 
-    public ImagesOverviewAdapter(Activity activity, ImagesOverviewAdapterHandler handler) {
+    public ImagesOverviewAdapter(Activity activity) {
         this.context = activity;
-        this.handler = handler;
+        this.handler = (ImagesOverviewAdapterHandler) activity;
         flickrImageDataList = new ArrayList<>();
         ImageGalleryApplication application = (ImageGalleryApplication) activity.getApplication();
         application.appComponent.inject(this);
+    }
+
+    @Inject
+    public ImagesOverviewAdapter(Activity activity, FlickrApi flickrApi) {
+        this.flickrApi = flickrApi;
+        this.context = activity;
+        this.handler = (ImagesOverviewAdapterHandler) activity;
+        flickrImageDataList = new ArrayList<>();
     }
 
     public interface ImagesOverviewAdapterHandler {
@@ -51,20 +58,24 @@ public class ImagesOverviewAdapter extends RecyclerView.Adapter<ImagesOverviewAd
          * @param view
          */
         void onClick(ArrayList<FlickrImageData> flickrImageData, int index, View view);
+
         /**
          * Returns the error
          *
-         * @param  exception error
+         * @param exception error
          */
         void onError(Throwable exception);
+
         /**
          * Shows progress bar
          */
         void onFetchingStarted();
+
         /**
          * Hides progress bar
          */
         void onFetchingEnded();
+
         /**
          * Dismisses error
          */
@@ -76,7 +87,8 @@ public class ImagesOverviewAdapter extends RecyclerView.Adapter<ImagesOverviewAd
      */
     class ImagesOverviewAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.flickr_image_thumbnail_image_view) ImageView imageThumbnail;
+        @BindView(R.id.flickr_image_thumbnail_image_view)
+        ImageView imageThumbnail;
 
         ImagesOverviewAdapterViewHolder(View view) {
             super(view);
@@ -111,7 +123,6 @@ public class ImagesOverviewAdapter extends RecyclerView.Adapter<ImagesOverviewAd
 
     /**
      * Fetches new portion of images from flickr
-     *
      */
     public void fetchImages() {
         handler.onDismissError();

@@ -119,7 +119,7 @@ public class OverviewActivity
     }
 
     public void setAdapter() {
-        imagesOverviewAdapter = new ImagesOverviewAdapter(this, this);
+        imagesOverviewAdapter = new ImagesOverviewAdapter(this);
         gridLayoutManager   = new GridLayoutManager(this, NUMBER_OF_COLUMNS);
 
         overviewRecyclerView.setLayoutManager(gridLayoutManager);

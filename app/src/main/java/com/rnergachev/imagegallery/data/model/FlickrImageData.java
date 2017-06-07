@@ -26,7 +26,7 @@ public class FlickrImageData implements Parcelable{
 
     }
 
-    public FlickrImageData(String title, FlickrImage media, String date, String description, String published, String author, String authorId, String tags) {
+    public FlickrImageData(String title, FlickrImage media, String date, String description, String published, String author, String tags) {
         this.title = title;
         this.media = media;
         this.date = date;

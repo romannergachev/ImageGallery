@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  */
 
 public class ImagesOverviewAdapter extends RecyclerView.Adapter<ImagesOverviewAdapter.ImagesOverviewAdapterViewHolder> {
-    private List<FlickrImageData> flickrImageDataList;
+    private ArrayList<FlickrImageData> flickrImageDataList;
     private Context context;
     private final ImagesOverviewAdapterHandler handler;
     @Inject
@@ -50,7 +50,7 @@ public class ImagesOverviewAdapter extends RecyclerView.Adapter<ImagesOverviewAd
          * @param flickrImageData that has been selected
          * @param view
          */
-        void onClick(FlickrImageData flickrImageData, View view);
+        void onClick(ArrayList<FlickrImageData> flickrImageData, int index, View view);
         /**
          * Returns the error
          *
@@ -87,8 +87,7 @@ public class ImagesOverviewAdapter extends RecyclerView.Adapter<ImagesOverviewAd
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            FlickrImageData flickrImageData = flickrImageDataList.get(adapterPosition);
-            handler.onClick(flickrImageData, v.findViewById(R.id.flickr_image_thumbnail_image_view));
+            handler.onClick(flickrImageDataList, adapterPosition, v.findViewById(R.id.flickr_image_thumbnail_image_view));
         }
     }
 

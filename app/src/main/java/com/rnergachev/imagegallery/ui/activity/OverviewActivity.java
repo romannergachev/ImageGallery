@@ -17,6 +17,8 @@ import com.rnergachev.imagegallery.data.model.FlickrImageData;
 import com.rnergachev.imagegallery.ui.adapter.ImagesOverviewAdapter;
 import com.rnergachev.imagegallery.ui.listener.EndlessRecyclerViewScrollListener;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -84,9 +86,10 @@ public class OverviewActivity
     }
 
     @Override
-    public void onClick(FlickrImageData flickrImageData, View view) {
+    public void onClick(ArrayList<FlickrImageData> flickrImageData, int index, View view) {
         Intent intent = new Intent(this, ImageActivity.class);
-        //intent.putExtra(getString(R.string.activity_image_detail), flickrImageData);
+        intent.putParcelableArrayListExtra(getString(R.string.activity_image_detail), flickrImageData);
+        intent.putExtra(getString(R.string.image_position), index);
 
         ActivityOptionsCompat options = ActivityOptionsCompat.
             makeSceneTransitionAnimation(this, view, getString(R.string.transition_image));
